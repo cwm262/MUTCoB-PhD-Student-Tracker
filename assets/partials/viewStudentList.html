@@ -1,0 +1,75 @@
+<div class="container loading-wrapper">
+    <spinner class="loading" name="tcobMDCspinner" on-loaded='globalAPI.showLoaderAndRefreshStudents("/api/students")'>
+        <div class="sk-circle">
+            <div class="sk-circle1 sk-child"></div>
+            <div class="sk-circle2 sk-child"></div>
+            <div class="sk-circle3 sk-child"></div>
+            <div class="sk-circle4 sk-child"></div>
+            <div class="sk-circle5 sk-child"></div>
+            <div class="sk-circle6 sk-child"></div>
+            <div class="sk-circle7 sk-child"></div>
+            <div class="sk-circle8 sk-child"></div>
+            <div class="sk-circle9 sk-child"></div>
+            <div class="sk-circle10 sk-child"></div>
+            <div class="sk-circle11 sk-child"></div>
+            <div class="sk-circle12 sk-child"></div>
+        </div>
+    </spinner>
+</div>
+
+<div class="alertBox" uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="globalAPI.closeAlert($index)" dismiss-on-timeout="4000">{{alert.msg}}</div>
+
+<div class="container default-top-spacer">
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1" ng-if="showStudents">
+            <table class="studentListTable table table-condensed table-hover" style="table-layout: fixed;">
+                <thead>
+                    <form role="form">
+                        <div class="form-group row">
+                            <span class="studentListTableHeader pull-left">Students: {{statusSelect.value}}</span>
+                            <div class="col-xs-3 pull-right">
+                                <select class="form-control" id="statusSelect" name="statusSelect" ng-model="statusSelect" ng-options="selectOption.name for selectOption in selectOptions"></select>
+                            </div>
+                        </div>
+                    </form>
+                    <tr>
+                        <th ng-click="sortType='StudentNumber';sortReverse=!sortReverse">
+                            <span class="glyphicon" ng-show="sortType == 'StudentNumber'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span>
+                            Student Number
+                        </th>
+                        <th ng-click="sortType='PawPrint';sortReverse=!sortReverse">
+                            <span class="glyphicon" ng-show="sortType == 'PawPrint'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span>
+                            Paw Print
+                        </th>
+                        <th ng-click="sortType='LastName';sortReverse=!sortReverse">
+                            <span class="glyphicon" ng-show="sortType == 'LastName'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span> 
+                            Last Name
+                        </th>
+                        <th ng-click="sortType='FirstName';sortReverse=!sortReverse">
+                            <span class="glyphicon" ng-show="sortType == 'FirstName'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span> 
+                            First Name
+                        </th>
+                        <th ng-if="statusSelect.value == ''">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ui-sref="editStudent.general({studentId: student.Id})" dir-paginate="student in students|filter:statusSelect.value|orderBy:sortType:sortReverse|itemsPerPage:pageSize">
+                        <td ng-bind="student.StudentNumber">
+                        <td ng-bind="student.PawPrint"></td>
+                        <td ng-bind="student.LastName"></td>
+                        <td ng-bind="student.FirstName"></td>
+                        <td ng-if="statusSelect.value == ''" ng-bind="student.PhDStatus"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+            </div>
+        </div>
+        <div ng-cloak class="container" ng-if="noStudentsToShow">
+            <h2>You don't seem to have any students in the tracker.</h2>
+        </div>
+    </div>
+</div>

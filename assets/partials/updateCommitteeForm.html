@@ -1,0 +1,8 @@
+﻿<form class="modal-padding" novalidate>
+    <h3>Update Committee Member</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="updateCommitteeModel" fields="updateCommitteeFields" form="updateCommitteeForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="updateCommitteeForm.$invalid" ng-click="submitCommitteeUpdate(updateCommitteeModel)">Submit</button>
+    </formly-form>
+</form>

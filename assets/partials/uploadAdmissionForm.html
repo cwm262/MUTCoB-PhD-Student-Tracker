@@ -1,0 +1,62 @@
+<form class="modal-padding" name="addAdmissionForm">
+    <h3>Add Admission Offer</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <div class="checkbox">
+        <label><input type="checkbox" ng-model="declineCheckBox"/>Declined?</label>
+    </div>
+    <div class="form-group" ng-show="declineCheckBox">
+        <label for="reasonForDecline">Reason for Decline:</label>
+        <textarea ng-minlength="4" ng-maxlength="140" name="reasonForDecline" ng-model="reasonForDecline" class="form-control"
+            ng-required="declineCheckBox" />
+        <span class="err-messages" ng-show="addAdmissionForm.reasonForDecline.$error.minlength">Too few characters.</span>
+        <span class="err-messages" ng-show="addAdmissionForm.reasonForDecline.$error.maxlength">Too many characters.</span>
+        <span class="err-messages" ng-show="addAdmissionForm.reasonForDecline.$error.required">You must specify why this is declined.</span>
+    </div>
+    <label for="file">Corresponding File (optional):</label>
+    <div class="input-group">
+        <input type="file" ngf-select ng-model="fileToUpload" name="file" accept=".pdf" ngf-max-size="20MB" ngf-model-invalid="errorFile">
+        <i ng-show="addAdmissionForm.file.$error.maxSize">
+            File too large
+            {{errorFile.size / 1000000|number:1}}MB: max 20M
+        </i>
+        <button type="button" class="btn btn-info" ng-click="fileToUpload = null" ng-show="fileToUpload">Remove</button>
+    </div>
+    <label for="OfferDate">Offer Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="offerDate" name="offerDate" ng-model="offerDate" class="form-control" ng-click="datepicker1.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker1.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker1.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="addAdmissionForm.offerDate.$error.date">This offer date is not a valid format.</span>
+    <br>
+    <label for="ApplicationDate">Application Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="applicationDate" name="applicationDate" ng-model="applicationDate" class="form-control" ng-click="datepicker2.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker2.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker2.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="addAdmissionForm.applicationDate.$error.date">This application date is not a valid format.</span>
+    <br>
+    <label for="CampusVisitDate">Campus Visit Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="campusVisitDate" name="campusVisitDate" ng-model="campusVisitDate" class="form-control" ng-click="datepicker3.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker3.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker3.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="addAdmissionForm.campusVisitDate.$error.date">This campus visit date is not a valid format.</span>
+    <br>
+    <br>
+    <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="!addAdmissionForm.$valid || addAdmissionForm.$pristine" ng-click="submitAdmissionForm(fileToUpload, reasonForDecline, offerDate, applicationDate, campusVisitDate)">
+        Submit
+    </button>
+</form>

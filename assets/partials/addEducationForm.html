@@ -1,0 +1,8 @@
+<form class="modal-padding" novalidate>
+    <h3>Add to Education</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="education" fields="educationFields" form="educationForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="educationForm.$invalid" ng-click="submitEducation(education)">Submit</button>
+    </formly-form>
+</form>

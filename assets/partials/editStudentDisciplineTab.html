@@ -1,0 +1,107 @@
+﻿<div class="container default-top-spacer">
+    <!-- Discipline Forms Heading & Table -->
+    <div id="discFormsArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Discipline Forms</h2>
+            <button type="button" class="btn btn-default" ng-click="addDiscForm()">Add</button>
+        </div>
+        <table class="table table-responsive default-top-spacer" ng-if="academicProbLOPs.length">
+            <caption>Academic Probation - Lack of Progress</caption>
+            <thead>
+                <tr>
+                    <th>Form</th>
+                    <th>Submission Date</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="academicProbLOP in academicProbLOPs | orderBy: 'SubmitDate'">
+                    <td>
+                        <a ng-if="academicProbLOP.PDFName" ng-bind="academicProbLOP.PDFName || '&quot;null&quot;'" ng-href="{{baseUrl}}/api/download?id={{studentData.Id}}&fileType={{academicProbLOP.FileType}}&fileName={{academicProbLOP.PDFName}}"
+                           download></a>
+                    </td>
+                    <td ng-bind="academicProbLOP.SubmitDate"></td>
+                    <td><a href="" ng-click="updateDiscForm(academicProbLOP, 'academicProbLOP')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeDiscForm(academicProbLOP)" confirm="WARNING: Deletion is permanent. This data will be lost. Are you sure you want to delete this form?"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-if="academicProbURGs.length">
+            <caption>Academic Probation - Unsatisfactory Research Grade</caption>
+            <thead>
+                <tr>
+                    <th>Form</th>
+                    <th>Submission Date</th>
+                    <th>Semester</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="academicProbURG in academicProbURGs | orderBy: 'SubmitDate'">
+                    <td>
+                        <a ng-if="academicProbURG.PDFName" ng-bind="academicProbURG.PDFName || '&quot;null&quot;'" ng-href="{{baseUrl}}/api/download?id={{studentData.Id}}&fileType={{academicProbURG.FileType}}&fileName={{academicProbURG.PDFName}}"
+                           download></a>
+                    </td>
+                    <td ng-bind="academicProbURG.SubmitDate"></td>
+                    <td ng-bind="academicProbURG.Semester"></td>
+                    <td><a href="" ng-click="updateDiscForm(academicProbURG, 'academicProbURG')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeDiscForm(academicProbURG)" confirm="WARNING: Deletion is permanent. This data will be lost. Are you sure you want to delete this form?"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-if="recommendations.length">
+            <caption>Recommendation</caption>
+            <thead>
+                <tr>
+                    <th>Form</th>
+                    <th>Submission Date</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="recommendation in recommendations | orderBy: 'SubmitDate'">
+                    <td>
+                        <a ng-if="recommendation.PDFName" ng-bind="recommendation.PDFName || '&quot;null&quot;'" ng-href="{{baseUrl}}/api/download?id={{studentData.Id}}&fileType={{recommendation.FileType}}&fileName={{recommendation.PDFName}}"
+                           download></a>
+                    </td>
+                    <td ng-bind="recommendation.SubmitDate"></td>
+                    <td><a href="" ng-click="updateDiscForm(recommendation, 'recommendation')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeDiscForm(recommendation)" confirm="WARNING: Deletion is permanent. This data will be lost. Are you sure you want to delete this form?"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-if="counselings.length">
+            <caption>Counseling</caption>
+            <thead>
+                <tr>
+                    <th>Form</th>
+                    <th>Submission Date</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="counseling in counselings | orderBy: 'SubmitDate'">
+                    <td>
+                        <a ng-if="counseling.PDFName" ng-bind="counseling.PDFName || '&quot;null&quot;'" ng-href="{{baseUrl}}/api/download?id={{studentData.Id}}&fileType={{counseling.FileType}}&fileName={{counseling.PDFName}}"
+                           download></a>
+                    </td>
+                    <td ng-bind="counseling.SubmitDate"></td>
+                    <td><a href="" ng-click="updateDiscForm(counseling, 'counseling')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeDiscForm(counseling)" confirm="WARNING: Deletion is permanent. This data will be lost. Are you sure you want to delete this form?"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

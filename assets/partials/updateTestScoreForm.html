@@ -1,0 +1,8 @@
+<form class="modal-padding" novalidate>
+    <h3>Update Test Score</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="updateTestScoreModel" fields="updateTestScoreFields" form="updateTestScoreForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="updateTestScoreForm.$invalid || updateTestScoreForm.$pristine" ng-click="submitTestScoreUpdate(updateTestScoreModel)">Submit</button>
+    </formly-form>
+</form>

@@ -1,0 +1,64 @@
+﻿<form class="modal-padding" name="updateAdmissionForm">
+    <h3>Update Admission Offer</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <div class="checkbox">
+        <label><input type="checkbox" ng-model="declineCheckBox"/>Declined?</label>
+    </div>
+    <div class="form-group" ng-show="declineCheckBox">
+        <label for="reasonForDecline">Reason for Decline:</label>
+        <textarea ng-minlength="4" ng-maxlength="140" name="reasonForDecline" ng-model="updateAdmissionOfferModel.ReasonForDecline" class="form-control"
+            ng-required="declineCheckBox" />
+        <span class="err-messages" ng-show="updateAdmissionForm.reasonForDecline.$error.minlength">Too few characters.</span>
+        <span class="err-messages" ng-show="updateAdmissionForm.reasonForDecline.$error.maxlength">Too many characters.</span>
+        <span class="err-messages" ng-show="updateAdmissionForm.reasonForDecline.$error.required">You must specify why this is declined.</span>
+    </div>
+    <label for="file">Corresponding File (optional):</label>
+    <div class="input-group">
+        <span>File currently on record: <i>{{updateAdmissionOfferModel.Attachment || 'None'}}</i></span>
+        <input type="file" ngf-select ng-model="updateAdmissionOfferModel.fileToUpload" name="file" accept=".pdf" ngf-max-size="20MB" ngf-model-invalid="errorFile">
+        <i ng-show="updateAdmissionForm.file.$error.maxSize">
+            File too large
+            {{errorFile.size / 1000000|number:1}}MB: max 20M
+        </i>
+        <button type="button" class="btn btn-xs btn-default" ng-click="removeAttachment()" ng-show="showRemoveButton">Remove</button>
+        <span class='err-messages' ng-show="showYourFileWillBeRemoved">Your file will be removed. If this is not what you want, click 'Cancel' at the bottom of this form.</span>
+    </div>
+    <label for="OfferDate">Offer Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="OfferDate" name="OfferDate" ng-model="updateAdmissionOfferModel.OfferDate" class="form-control" ng-click="datepicker1.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker1.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker1.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="updateAdmissionForm.offerDate.$error.date">This offer date is not a valid format.</span>
+    <br>
+    <label for="ApplicationDate">Application Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="ApplicationDate" name="ApplicationDate" ng-model="updateAdmissionOfferModel.ApplicationDate" class="form-control" ng-click="datepicker2.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker2.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker2.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="updateAdmissionForm.applicationDate.$error.date">This application date is not a valid format.</span>
+    <br>
+    <label for="CampusVisitDate">Campus Visit Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="CampusVisitDate" name="CampusVisitDate" ng-model="updateAdmissionOfferModel.CampusVisitDate" class="form-control" ng-click="datepicker3.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker3.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker3.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="updateAdmissionForm.campusVisitDate.$error.date">This campus visit date is not a valid format.</span>
+    <br>
+    <br>
+    <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="updateAdmissionForm.$invalid" ng-click="submitUpdateAdmissionForm(updateAdmissionOfferModel.fileToUpload, updateAdmissionOfferModel)">
+        Submit
+    </button>
+</form>

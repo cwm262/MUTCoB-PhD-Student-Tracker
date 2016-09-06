@@ -1,0 +1,41 @@
+<form class="modal-padding" name="addDiscForm">
+    <h3>Add Disciplinary Form</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <label for="file">Corresponding File: </label>
+    <div class="input-group">
+        <input type="file" ngf-select ng-model="fileToUpload" name="file" accept=".pdf" ngf-max-size="20MB" ngf-model-invalid="errorFile" ng-required="true">
+        <i ng-show="addDiscForm.file.$error.maxSize">
+            File too large
+            {{errorFile.size / 1000000|number:1}}MB: max 20M
+        </i>
+        <button type="button" class="btn btn-xs btn-default" ng-click="fileToUpload = null" ng-show="fileToUpload">Remove</button>
+    </div>
+    <span class="err-messages" ng-show="addDiscForm.file.$error.required">You must attach a form.</span>
+    <br />
+    <label for="SubmissionDate">Submission Date (optional): </label>
+    <div class="input-group">
+        <input type="text" id="submissionDate" name="submissionDate" ng-model="submissionDate" class="form-control" ng-click="datepicker1.open($event)"
+            uib-datepicker-popup="{{format}}" is-open="datepicker1.opened" datepicker-options="dateOptions" alt-input-formats="formats" placeholder="2/11/1839"
+        />
+        <span class="input-group-addon input-addon-btn" ng-click="datepicker1.open($event)" ng-disabled="to.disabled">
+            <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+    </div>
+    <span class="err-messages" ng-show="addDiscForm.submissionDate.$error.date">This offer date is not a valid format.</span>
+    <br>
+    <div class="form-group">
+        <label for="formType">Type of Form: </label>
+        <select class="form-control" id="formType" name="formType" ng-model="formType" ng-options="typeOption.name for typeOption in typeOptions" ng-required="true"></select>
+    </div>
+    <span class="err-messages" ng-show="addDiscForm.formType.$error.required">You must specify the type of form.</span>
+    <div class="form-group" ng-show="formType.value == 'academicProbURG'">
+        <label for="semester">Semester: </label>
+        <select class="form-control" id="semester" name="semester" ng-model="semester" ng-options="semesterOption.name for semesterOption in semesterOptions" ng-required="formType.value == 'academicProbURG'"></select>
+    </div>
+    <span class="err-messages" ng-show="formType.value == 'academicProbURG' && addDiscForm.semester.$error.required">You must specify the semester.</span>
+    <br>
+    <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+    <button type="submit" class="btn btn-primary" ng-disabled="!addDiscForm.$valid || addDiscForm.$pristine" ng-click="submitDiscForm(fileToUpload, submissionDate, formType, semester)">
+        Submit
+    </button>
+</form>

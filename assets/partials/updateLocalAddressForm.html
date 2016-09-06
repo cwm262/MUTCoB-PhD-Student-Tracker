@@ -1,0 +1,8 @@
+﻿<form class="modal-padding" novalidate>
+    <h3>Update Local Address</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="localAddress" fields="localAddressFields" form="localAddressForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="localAddressForm.$invalid" ng-click="submitLocalAddress(localAddress)">Submit</button>
+    </formly-form>
+</form>

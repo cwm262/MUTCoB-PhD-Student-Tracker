@@ -1,0 +1,8 @@
+<form class="modal-padding" novalidate>
+    <h3>Update Graduation and Placement Information</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="gradAndPlacementModel" fields="gradAndPlacementFields" form="updateGradAndPlacementForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="updateGradAndPlacementForm.$invalid || updateGradAndPlacementForm.$pristine" ng-click="submitGradAndPlacement(gradAndPlacementModel)">Submit</button>
+    </formly-form>
+</form>

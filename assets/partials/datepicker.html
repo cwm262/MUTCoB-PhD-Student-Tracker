@@ -1,0 +1,8 @@
+<p class="input-group">
+    <input type="text" id="{{::id}}" name="{{::id}}" ng-model="model[options.key]" class="form-control" ng-click="datepicker.open($event)"
+        uib-datepicker-popup="{{to.datepickerOptions.format}}" is-open="datepicker.opened" datepicker-options="to.datepickerOptions" alt-input-formats="to.datepickerOptions.altInputFormats"
+    />
+    <span class="input-group-addon input-addon-btn" ng-click="datepicker.open($event)" ng-disabled="to.disabled">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</p>

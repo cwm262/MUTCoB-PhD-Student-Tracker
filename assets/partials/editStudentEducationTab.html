@@ -1,0 +1,175 @@
+<div class="container default-top-spacer">
+    <!-- Education Heading & Table -->
+    <div id="educationArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Education</h2>
+            <button type="button" class="btn btn-default" ng-click="addEducation()">Add</button>
+        </div>
+        <table class="table table-responsive default-top-spacer" ng-show="showEducation">
+            <thead>
+                <tr>
+                    <th>Institution</th>
+                    <th>Location</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Degree Title</th>
+                    <th>Degree</th>
+                    <th>Degree Date</th>
+                    <th>GPA</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="education in educationHistory">
+                    <td ng-bind="education.Institution || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.Location || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.StartDate || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.EndDate || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.DegreeTitle || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.Degree || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.DegreeDate || '&quot;null&quot;'"></td>
+                    <td ng-bind="education.GPA | number:1 || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateEducation(education)"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeEducation(education.Id)" confirm="Are you sure that you want to delete this education entry? This is permanent."><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Test Scores Heading & Tables -->
+    <div id="testScoresArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Test Scores</h2>
+            <button type="button" class="btn btn-default" ng-click="addTestScore()">Add</button>
+        </div>
+        <table class="table table-responsive default-top-spacer" ng-show="showGMAT">
+            <caption>GMAT</caption>
+            <thead>
+                <tr>
+                    <th>Total Score</th>
+                    <th>Date</th>
+                    <th>Verbal</th>
+                    <th>Quantitative</th>
+                    <th>Written</th>
+                    <th>Total as %</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="gmat in gmatResults">
+                    <td ng-bind="gmat.TotalScore || '&quot;null&quot;'"></td>
+                    <td ng-bind="gmat.Date || '&quot;null&quot;'"></td>
+                    <td ng-bind="gmat.Verbal || '&quot;null&quot;'"></td>
+                    <td ng-bind="gmat.Quantitative || '&quot;null&quot;'"></td>
+                    <td ng-bind="gmat.Written || '&quot;null&quot;'"></td>
+                    <td ng-bind="gmat.TotalPercent || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateTestScore(gmat, 'GMAT')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeTestScore(gmat.Id, 'GMAT')" confirm="Are you sure that you want to delete this test entry? This is permanent."><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-show="showGRE">
+            <caption>GRE</caption>
+            <thead>
+                <tr>
+                    <th>Total Score</th>
+                    <th>Date</th>
+                    <th>Verbal</th>
+                    <th>Quantitative</th>
+                    <th>Written</th>
+                    <th>Total as %</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="gre in greResults">
+                    <td ng-bind="gre.TotalScore || '&quot;null&quot;'"></td>
+                    <td ng-bind="gre.Date || '&quot;null&quot;'"></td>
+                    <td ng-bind="gre.Verbal || '&quot;null&quot;'"></td>
+                    <td ng-bind="gre.Quantitative || '&quot;null&quot;'"></td>
+                    <td ng-bind="gre.Written || '&quot;null&quot;'"></td>
+                    <td ng-bind="gre.TotalPercent || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateTestScore(gre, 'GRE')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeTestScore(gre.Id, 'GRE')" confirm="Are you sure that you want to delete this test entry? This is permanent."><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-show="showIELTS">
+            <caption>IELTS</caption>
+            <thead>
+                <tr>
+                    <th>Total Score</th>
+                    <th>Date</th>
+                    <th>Total as %</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ielts in ieltsResults">
+                    <td ng-bind="ielts.TotalScore || '&quot;null&quot;'"></td>
+                    <td ng-bind="ielts.Date || '&quot;null&quot;'"></td>
+                    <td ng-bind="ielts.TotalPercent || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateTestScore(ielts, 'IELTS')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeTestScore(ielts.Id, 'IELTS')" confirm="Are you sure that you want to delete this test entry? This is permanent."><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-show="showTOEFL">
+            <caption>TOEFL</caption>
+            <thead>
+                <tr>
+                    <th>Total Score</th>
+                    <th>Date</th>
+                    <th>Total as %</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="toefl in toeflResults">
+                    <td ng-bind="toefl.TotalScore || '&quot;null&quot;'"></td>
+                    <td ng-bind="toefl.Date || '&quot;null&quot;'"></td>
+                    <td ng-bind="toefl.TotalPercent || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateTestScore(toefl, 'TOEFL')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeTestScore(toefl.Id, 'TOEFL')" confirm="Are you sure that you want to delete this test entry? This is permanent."><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer" ng-show="showSpeakTest">
+            <caption>Speak Test</caption>
+            <thead>
+                <tr>
+                    <th>Total Score</th>
+                    <th>Date</th>
+                    <th>Total as %</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="speakTest in speakTestResults">
+                    <td ng-bind="speakTest.TotalScore || '&quot;null&quot;'"></td>
+                    <td ng-bind="speakTest.Date || '&quot;null&quot;'"></td>
+                    <td ng-bind="speakTest.TotalPercent || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateTestScore(speakTest, 'SpeakTest')"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeTestScore(speakTest.Id, 'SpeakTest')" confirm="Are you sure that you want to delete this test entry? This is permanent."><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

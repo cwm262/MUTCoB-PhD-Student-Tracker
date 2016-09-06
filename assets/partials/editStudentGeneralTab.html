@@ -1,0 +1,219 @@
+<div class="container default-top-spacer">
+    <!-- Status Heading & Table -->
+    <div id="statusArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Status</h2>
+            <button type="button" class="btn btn-default" ng-click="updateStatus()">Update</button>
+        </div>
+        <table class="table default-top-spacer">
+            <tr>
+                <td ng-bind="studentData.PhDStatus"></td>
+            </tr>
+        </table>
+    </div>
+    <!-- Basic Information Heading & Table -->
+    <div id="basicInfoArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Basic Information</h2>
+            <button type="button" class="btn btn-default" ng-click="updateBasic()">Update</button>
+        </div>
+        <table class="table table-responsive default-top-spacer">
+            <thead>
+                <tr>
+                    <th>Student Number</th>
+                    <th>Pawprint</th>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Program</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="studentData.StudentNumber || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PawPrint  || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.LastName  || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.FirstName  || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.MiddleName  || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.Program  || '&quot;null&quot;'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Admission Offers Heading & Table -->
+    <div id=admissionOfferArea class="container well well-lg">
+        <div class="table-heading default-top-spacer">
+            <h2>Admission Offers</h2>
+            <button type="button" class="btn btn-default" ng-click="addOffer()">Add</button>
+        </div>
+        <table class="table table-responsive default-top-spacer" ng-show="showAdmissionOffersTable">
+            <thead>
+                <tr>
+                    <th>Offer Date</th>
+                    <th>Reason for Decline</th>
+                    <th>Attached File</th>
+                    <th>Application Date</th>
+                    <th>Campus Visit Date</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="admissionOffer in admissionOffers">
+                    <td ng-bind="admissionOffer.OfferDate || '&quot;null&quot;'"></td>
+                    <td ng-bind="admissionOffer.ReasonForDecline || 'Not Declined'"></td>
+                    <td>
+                        <a ng-if="admissionOffer.Attachment" ng-bind="admissionOffer.Attachment || '&quot;null&quot;'"
+                        ng-href="{{baseUrl}}/api/download?id={{studentData.Id}}&fileType=admissionOffer&fileName={{admissionOffer.Attachment}}"
+                           ></a>
+                    </td>
+                    <td ng-bind="admissionOffer.ApplicationDate || '&quot;null&quot;'"></td>
+                    <td ng-bind="admissionOffer.CampusVisitDate || '&quot;null&quot;'"></td>
+                    <td><a href="" ng-click="updateAdmissionOffer(admissionOffer)"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td>
+                        <a href="" ng-click="removeAdmissionOffer(admissionOffer)" confirm="WARNING: Deletion is permanent. This data will be lost. Are you sure you want to delete this offer?"><span class="glyphicon glyphicon-remove"></span></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Addresses Heading & Table-->
+    <div id="addressArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Addresses</h2>
+            <button type="button" class="btn btn-default" ng-click="updatePermanentAddress()">Update Permanent</button>
+            <button type="button" class="btn btn-default" ng-click="updateLocalAddress()">Update Local</button>
+        </div>
+        <table class="table table-responsive default-top-spacer">
+            <caption>Permanent Address</caption>
+            <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Other</th>
+                    <th>Postal Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="studentData.PermanentAddress || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PermanentCity || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PermanentState || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PermanentCountry || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PermanentOtherInfo || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PermanentZipCode || '&quot;null&quot;'"></td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-responsive default-top-spacer">
+            <caption>Local Address</caption>
+            <thead>
+                <tr>
+                    <th>Street</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Postal Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="studentData.LocalAddress || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.LocalCity || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.LocalState || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.LocalZipCode || '&quot;null&quot;'" </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Contact Information Heading & Table -->
+    <div id="contactInfoArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Contact Information</h2>
+            <button type="button" class="btn btn-default" ng-click="updateContact()">Update</button>
+        </div>
+        <table class="table table-responsive default-top-spacer">
+            <thead>
+                <tr>
+                    <th>Primary Phone Number</th>
+                    <th>Secondary Phone Number</th>
+                    <th>Work Phone Number</th>
+                    <th>Office</th>
+                    <th>Primary Email Address</th>
+                    <th>Secondary Email Address</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="studentData.PrimaryPhone || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.SecondaryPhone || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.WorkPhone || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.OfficeBuilding || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.PrimaryEmail || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.SecondaryEmail || '&quot;null&quot;'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Personal Information Heading & Table -->
+    <div id="personalInfoArea" class="container well well-lg">
+        <div class="table-heading">
+            <h2>Personal Information</h2>
+            <button type="button" class="btn btn-default" ng-click="updatePersonal()">Update</button>
+        </div>
+        <table class="table table-responsive default-top-spacer">
+            <thead>
+                <tr>
+                    <th>Gender</th>
+                    <th>Ethnicity</th>
+                    <th>Date of Birth</th>
+                    <th>Country of Origin</th>
+                    <th>Citizenship Status</th>
+                    <th>Country of Citizenship</th>
+                    <th>Visa Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="studentData.PreferredGender || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.Ethnicity || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.DOB || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.CountryOrigin || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.CitizenStatus || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.CountryOfCitizenship || '&quot;null&quot;'"></td>
+                    <td ng-bind="studentData.VisaType || '&quot;null&quot;'"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Comments Heading & Table -->
+    <div id="commentsArea" class="container well well-lg">
+        <div class="table-heading default-top-spacer">
+            <h2>Comments</h2>
+            <button type="button" class="btn btn-default" ng-click="addComment()">Add</button>
+        </div>
+        <table class="table table-responsive default-top-spacer" ng-show="showComments">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Comment</th>
+                    <th>Posted by</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="comment in comments">
+                    <td ng-bind="comment.DateSubmitted"></td>
+                    <td ng-bind="comment.Comment"></td>
+                    <td ng-bind="comment.User"></td>
+                    <td>
+                        <a href="" ng-click="removeComment(comment)" confirm="Are you sure that you want to delete this comment? This is permanent.">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

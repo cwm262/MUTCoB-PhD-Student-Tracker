@@ -1,0 +1,59 @@
+<div class="container default-top-spacer">
+    <!-- Activity Area -->
+    <div id="activityArea" class="container panel default-panel well" ">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+
+                    <input type="text" class="form-control" placeholder="Search activity" ng-model="actSearch">
+
+                </div>
+            </div>
+        </form>
+        <table class="table table-striped" style="table-layout: fixed;" ng-if="changes.length">
+            <thead>
+            <tr>
+                <th ng-click="sortType='Action';sortReverse=!sortReverse">
+                    <span class="glyphicon" ng-show="sortType == 'Action'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span>
+                    Action
+                </th>
+                <th ng-click="sortType='ColumnName';sortReverse=!sortReverse">
+                    <span class="glyphicon" ng-show="sortType == 'ColumnName'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span>
+                    What
+                </th>
+                <th ng-click="sortType='OldValue';sortReverse=!sortReverse">
+                    <span class="glyphicon" ng-show="sortType == 'OldValue'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span> 
+                    Old Value
+                </th>
+                <th ng-click="sortType='NewValue';sortReverse=!sortReverse">
+                    <span class="glyphicon" ng-show="sortType == 'NewValue'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span> 
+                    New Value
+                </th>
+                <th ng-click="sortType='DateModified';sortReverse=!sortReverse">
+                    <span class="glyphicon" ng-show="sortType == 'DateModified'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span> 
+                    When
+                </th>
+                <th ng-click="sortType='User';sortReverse=!sortReverse">
+                    <span class="glyphicon" ng-show="sortType == 'User'" ng-class="sortReverse ? 'glyphicon-arrow-down' : 'glyphicon-arrow-up'"></span> 
+                    User
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr dir-paginate="change in changes|fuzzy:actSearch|orderBy:sortType:sortReverse|itemsPerPage:pageSize">
+                    <td>{{change.Action}}</td>
+                    <td ng-if="change.TableName != 'Student'">{{change.TableName}} {{change.ColumnName}}</td>
+                    <td ng-if="change.TableName == 'Student'">{{change.ColumnName}}</td>
+                    <td ng-bind="change.OldValue"></td>
+                    <td ng-bind="change.NewValue"></td>
+                    <td ng-bind="change.DateModified | myDateFormat"></td>
+                    <td ng-bind="change.User"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div ng-if="changes.length">
+            <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="alertBox" uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="globalAPI.closeAlert($index)" dismiss-on-timeout="4000">{{alert.msg}}</div>
+
+<div class="container default-top-spacer">
+    <div class="row">
+        <span><h4>Showing results for: {{searchTerm || 'No search term entered'}}</h4></span>
+    </div>
+    <div class="row">
+        <div class="col-xs-10 col-xs-offset-1" ng-if="results.length">
+            <table class="studentListTable table table-condensed table-hover">
+                <thead>
+                <tr>
+                    <th ng-click="sortType='StudentNumber';sortReverse=!sortReverse"><i ng-class="{'glyphicon glyphicon-arrow-down': sortReverse && sortType == 'StudentNumber', 'glyphicon glyphicon-arrow-up': !sortReverse && sortType == 'StudentNumber'}"></i> Student Number</th>
+                    <th ng-click="sortType='PawPrint';sortReverse=!sortReverse"><i ng-class="{'glyphicon glyphicon-arrow-down': sortReverse && sortType == 'PawPrint', 'glyphicon glyphicon-arrow-up': !sortReverse && sortType == 'PawPrint'}"></i> PawPrint</th>
+                    <th ng-click="sortType='LastName';sortReverse=!sortReverse"><i ng-class="{'glyphicon glyphicon-arrow-down': sortReverse && sortType == 'LastName', 'glyphicon glyphicon-arrow-up': !sortReverse && sortType == 'LastName'}"></i> Last Name</th>
+                    <th ng-click="sortType='FirstName';sortReverse=!sortReverse"><i ng-class="{'glyphicon glyphicon-arrow-down': sortReverse && sortType == 'FirstName', 'glyphicon glyphicon-arrow-up': !sortReverse && sortType == 'FirstName'}"></i> First Name</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ui-sref="editStudent.general({studentId: student.Id})" dir-paginate="student in results|orderBy:sortType:sortReverse|itemsPerPage:pageSize">
+                        <td ng-bind="student.StudentNumber">
+                        <td ng-bind="student.PawPrint"></td>
+                        <td ng-bind="student.LastName"></td>
+                        <td ng-bind="student.FirstName"></td>
+                        <td ng-bind="student.PhDStatus"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <dir-pagination-controls boundary-links="true"></dir-pagination-controls>
+            </div>
+        </div>
+        <br>
+        <div class="container" ng-if="!results.length">
+            <h2>No results found.</h2>
+        </div>
+    </div>
+</div>

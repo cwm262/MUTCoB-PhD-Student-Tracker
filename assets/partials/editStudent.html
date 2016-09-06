@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <h3 id="editNameHeader" ng-if="lName && fName">{{lName}}, {{fName}}</h3>
+    <button type="button" class="pull-right btn btn-danger btn-sm" ng-if="status == 'Archived'" ng-click="permanentlyDeleteStudent(id)" confirm="Are you sure that you wish to PERMANENTLY DELETE this student?">DELETE</button>
+    <div class="alertBox" uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="globalAPI.closeAlert($index)" dismiss-on-timeout="4000">{{alert.msg}}</div>
+</div>
+<div class="container-fluid">
+    <tabs data="tabData" type="tabs"></tabs>
+</div>

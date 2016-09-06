@@ -1,0 +1,8 @@
+<form class="modal-padding" novalidate>
+    <h3>Add a Comment</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="comment" fields="commentFields" form="commentForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="commentForm.$invalid" ng-click="submitComment(comment)">Submit</button>
+    </formly-form>
+</form>

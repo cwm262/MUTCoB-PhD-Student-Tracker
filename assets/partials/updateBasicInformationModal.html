@@ -1,0 +1,8 @@
+﻿<form class="modal-padding" novalidate>
+    <h3>Update Basic Information</h3>
+    <div class="err-messages" ng-show="message">{{ message }}</div>
+    <formly-form model="basicInfo" fields="updateBasicInfoFormFields" form="updateBasicInfoForm">
+        <button type="button" class="btn btn-default" ng-click="close()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-disabled="updateBasicInfoForm.$invalid || updateBasicInfoForm.$pristine" ng-click="submitBasicInfo(basicInfo)">Submit</button>
+    </formly-form>
+</form>
